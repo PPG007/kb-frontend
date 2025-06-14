@@ -1,0 +1,42 @@
+{
+  "name": "kbcore",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "PPG007 <1658272229@qq.com>",
+  "license": "GPL-3.0",
+  "type": "module",
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
+    "@types/node": "^22.15.17",
+    "@vuepress/bundler-vite": "2.0.0-rc.23",
+    "@vuepress/plugin-copyright": "2.0.0-rc.103",
+    "@vuepress/plugin-slimsearch": "2.0.0-rc.103",
+    "@vuepress/plugin-watermark": "2.0.0-rc.103",
+    "@vueuse/core": "^13.2.0",
+    "bson": "4.6.4",
+    "crypto-js": "^4.2.0",
+    "element-plus": "^2.9.10",
+    "geolib": "^3.3.4",
+    "js-base64": "^3.7.7",
+    "json-editor-vue": "^0.18.1",
+    "sass-embedded": "^1.86.0",
+    "tesseract.js": "^6.0.1",
+    "typescript": "^5.8.3",
+    "unplugin-auto-import": "^19.3.0",
+    "unplugin-element-plus": "^0.10.0",
+    "unplugin-vue-components": "^28.7.0",
+    "use-element-plus-theme": "^0.0.5",
+    "uuid": "^11.1.0",
+    "vanilla-jsoneditor": "^3.3.1",
+    "vue": "^3.5.13",
+    "vuepress": "2.0.0-rc.23",
+    "vuepress-theme-hope": "2.0.0-rc.87"
+  },
+  "scripts": {
+    "docs:build": "tsc && NODE_OPTIONS=--max-old-space-size=8192 vuepress build docs",
+    "docs:clean-dev": "tsc && NODE_OPTIONS=--max-old-space-size=8192 vuepress dev docs --clean-cache",
+    "docs:dev": "tsc && NODE_OPTIONS=--max-old-space-size=8192 vuepress dev docs",
+    "docs:update-package": "pnpm dlx vp-update",
+    "compile": "tsc"
+  }
+}

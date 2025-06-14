@@ -1,0 +1,47 @@
+name: build
+
+on:
+  # pull_request:
+  #   paths:
+  #     - 'docs/**'
+  # workflow_call:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # “最近更新时间” 等 git 日志相关信息，需要拉取全部提交记录
+          fetch-depth: 0
+
+      - name: 'Setup pnpm'
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          # 选择要使用的 node 版本
+          node-version: '20'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 运行构建脚本
+      - name: Build VuePress site
+        env:
+          NODE_OPTIONS: --max_old_space_size=8192
+        run: pnpm docs:build
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: docs/.vuepress/dist
+          retention-days: 1
