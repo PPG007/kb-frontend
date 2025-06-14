@@ -15,12 +15,13 @@ export default defineUserConfig({
   lang: 'zh-CN',
   title: 'PPG007 的文档',
   description: 'PPG007 的站点',
+  base: '/kb-frontend/',
   theme: hopeTheme({
     navbar,
     sidebar,
-    hostname: 'https://ppg007.github.io',
+    hostname: 'https://ppg007.github.io/kb-frontend/',
     docsDir: 'docs',
-    docsRepo: 'https://github.com/PPG007/PPG007.github.io',
+    docsRepo: 'https://github.com/PPG007/PPG007.github.io/kb-frontend',
     docsBranch: 'main',
     markdown: {
       highlighter: {
@@ -45,13 +46,13 @@ export default defineUserConfig({
       },
       copyright: true,
       git: true,
-      comment: {
-        provider: 'Giscus',
-        repo: 'PPG007/PPG007.github.io',
-        repoId: 'R_kgDOGk5u3g',
-        category: 'General',
-        categoryId: 'DIC_kwDOGk5u3s4COgEc',
-      },
+      // comment: {
+      //   provider: 'Giscus',
+      //   repo: 'PPG007/PPG007.github.io',
+      //   repoId: 'R_kgDOGk5u3g',
+      //   category: 'General',
+      //   categoryId: 'DIC_kwDOGk5u3s4COgEc',
+      // },
     },
   }),
   bundler: viteBundler({
