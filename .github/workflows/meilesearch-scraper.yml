@@ -1,6 +1,6 @@
 name: scraper
 
-on: [workflow_dispatch, page_build]
+on: [workflow_dispatch]
 
 env:
   HOST_URL: ${{ secrets.MEILISEARCH_HOST_URL }}

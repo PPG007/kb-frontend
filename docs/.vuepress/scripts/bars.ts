@@ -13,9 +13,7 @@ import navbarList from './navbarList';
 
 const configPath = 'docs/.vuepress/config';
 
-const defaultNavbar: Array<NavbarGroupOptions> = [
-  { text: '首页', link: '/', icon: 'material-symbols:home', children: [] },
-];
+const defaultNavbar: Array<NavbarGroupOptions> = [];
 
 const formatLink = (link: string): string => {
   if (link.endsWith('/')) {
