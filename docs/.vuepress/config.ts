@@ -23,7 +23,7 @@ export default defineUserConfig({
     hostname,
     docsDir: 'docs',
     docsRepo,
-    docsBranch: 'main',
+    docsBranch: docsBranch,
     markdown: {
       highlighter: {
         type: 'shiki',

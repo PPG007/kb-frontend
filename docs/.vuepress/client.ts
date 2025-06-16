@@ -47,6 +47,7 @@ export default defineClientConfig({
       changeThemeFn = changeTheme;
       changeThemeFn(getColor(htmlClassList.value));
       setElementUIDark(isDarkMode.value);
+      window.parent.postMessage('ready');
     });
   },
 });
