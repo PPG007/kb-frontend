@@ -7,21 +7,22 @@ import ElementPlus from 'unplugin-element-plus/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
+import { base, hostname, docsRepo, docsBranch } from './consts';
 
-const { navbar, sidebar } = await init();
+const { sidebar } = await init();
 const __dirname = getDirname(import.meta.url);
 
 export default defineUserConfig({
   lang: 'zh-CN',
   title: 'PPG007 的文档',
   description: 'PPG007 的站点',
-  base: '/kb-frontend/',
+  base,
   theme: hopeTheme({
-    navbar,
+    navbar: false,
     sidebar,
-    hostname: 'https://ppg007.github.io/kb-frontend/',
+    hostname,
     docsDir: 'docs',
-    docsRepo: 'https://github.com/PPG007/PPG007.github.io/kb-frontend',
+    docsRepo,
     docsBranch: 'main',
     markdown: {
       highlighter: {
