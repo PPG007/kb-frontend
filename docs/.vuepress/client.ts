@@ -2,8 +2,7 @@ import 'element-plus/theme-chalk/dark/css-vars.css';
 import 'vanilla-jsoneditor/themes/jse-theme-dark.css';
 import { defineClientConfig } from 'vuepress/client';
 import { useDarkMode } from 'vuepress-theme-hope/client';
-import { onMounted, watch, ref } from 'vue';
-import { useHtmlClassWatcher } from './scripts';
+import { onMounted, watch } from 'vue';
 import { colors } from './styles';
 
 const setElementUIDark = (dark: boolean) => {
@@ -14,40 +13,38 @@ const setElementUIDark = (dark: boolean) => {
   }
 };
 
-const getColor = (classList: Array<string>): string => {
-  let index = 0;
-  classList.forEach((className) => {
+const setThemeColor = (color: string) => {
+  const index = colors.indexOf(color);
+  if (index === -1) {
+    return;
+  }
+  document.documentElement.classList.forEach((className) => {
     if (className.startsWith('theme-')) {
-      const temp = parseInt(className.replace(/^theme-/, ''));
-      if (!isNaN(temp)) {
-        index = temp - 1;
-      }
+      document.documentElement.classList.remove(className);
     }
   });
-  if (index >= 0 && index < colors.length) {
-    return colors[index];
+  if (index) {
+    document.documentElement.classList.add(`theme-${index + 1}`);
   }
-  return colors[0];
 }
 
 export default defineClientConfig({
   setup() {
-    let changeThemeFn = (color?: string): void => {}
     const { isDarkMode } = useDarkMode();
-    const htmlClassList = useHtmlClassWatcher();
     watch(isDarkMode, () => {
       setElementUIDark(isDarkMode.value);
     });
-    watch(htmlClassList, (newVal) => {
-      changeThemeFn(getColor(newVal));
-    })
     onMounted(async () => {
       const { useElementPlusTheme } = await import('use-element-plus-theme');
       const { changeTheme } = useElementPlusTheme();
-      changeThemeFn = changeTheme;
-      changeThemeFn(getColor(htmlClassList.value));
       setElementUIDark(isDarkMode.value);
       window.parent.postMessage('ready');
+      window.addEventListener('message', ({ data }) => {
+        if (data.type === 'themeColorUpdated' && typeof data.value === 'string') {
+          changeTheme(data.value);
+          setThemeColor(data.value);
+        }
+      })
     });
   },
 });
