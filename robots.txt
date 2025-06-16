@@ -1,0 +1,4 @@
+User-agent:*
+Disallow:
+
+Sitemap: https://ppg007.github.io/kb-frontend/kb-frontend/sitemap.xml
